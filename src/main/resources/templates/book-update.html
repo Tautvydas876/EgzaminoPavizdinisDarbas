@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Update</title>
+</head>
+<body>
+<div id="admin-page">
+    <h3>Book Editor</h3>
+    <div class="container margin_60_35" th:object="${book}">
+        <div class="row">
+            <div class="col-lg-4">
+                <form th:action="@{/admin-page/updateBook}" method="post" class="form-group">
+                    <input type="hidden" th:value="${book.id}" name="book_id" id="book_id">
+                    <div class="form-group">
+                        <textarea name="name" rows="1" class="form-control" placeholder="Name"
+                                  th:text="${book.bookName}"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="pageNumber" rows="1" class="form-control" placeholder="Page Number"
+                                  th:text="${book.bookPageNumber}"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="summary" class="form-control" rows="3" placeholder="Summary"
+                                  th:text="${book.bookSummary}"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="isbn" rows="1" class="form-control" placeholder="ISBN"
+                                  th:text="${book.isbn}"></textarea>
+                    </div>
+
+                    <div class="form-group">Is available?</div>
+                    <div class="form-group">
+                        <fieldset id="is_available" th:value="${book.available}">
+                            True: <input type="radio" name="is_available" value="true">
+                            False: <input type="radio" name="is_available" value="false">
+                        </fieldset>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Category: </label>
+                        <select name="category">
+                            <option th:each="cat : ${category}" th:text="${cat.name}" name="category"></option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <button type="submit" class="btn_1 rounded add_bottom_30">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
